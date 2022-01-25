@@ -6,6 +6,14 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379-6399:6379-6399"
+    environment:
+      - INITIAL_PORT=6379
+      - IP=0.0.0.0
   zookeeper:
     container_name: zookeeper
     image: confluentinc/cp-zookeeper

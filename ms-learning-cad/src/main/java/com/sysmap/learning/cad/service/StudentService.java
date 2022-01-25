@@ -1,6 +1,9 @@
 package com.sysmap.learning.cad.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sysmap.learning.cad.client.MsLearningCourseClient;
+import com.sysmap.learning.cad.dto.request.CreatedStudentEvent;
 import com.sysmap.learning.cad.dto.request.StudentRequest;
 import com.sysmap.learning.cad.data.StudentRepository;
 import com.sysmap.learning.cad.domain.Student;
@@ -25,14 +28,16 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
     private final MsLearningCourseClient msLearningCourseClient;
+    private final ObjectMapper objectMapper;
+    private final EventService eventService;
 
     public StudentCreateResponse createStudent(StudentRequest studentRequest) {
 
         var student = studentMapper.studentRequestToEntity(studentRequest);
         var courses = msLearningCourseClient.getCourseById(student.getCourseId());
 
-        log.info("inferno {}", courses);
-        if(courses.isEmpty()){
+        log.info("courses: {}", courses);
+        if (courses.isEmpty()) {
             throw new CourseIdNotFound(student.getCourseId());
         }
 
@@ -43,6 +48,20 @@ public class StudentService {
     }
 
     private Student completeDefaultStudentInfo(Student student) {
+
+        var studentEvent = new CreatedStudentEvent(
+                student.getStudentId(),
+                student.getFirstName() + " " + student.getLastName(),
+                student.getCourseId()
+        );
+
+        try {
+            String event = objectMapper.writeValueAsString(studentEvent);
+            eventService.sendStudent(event);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         return student.toBuilder()
                 .studentId(UUID.randomUUID().toString())
                 .status(true)

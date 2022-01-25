@@ -44,7 +44,7 @@ public class MsLearningCourseClient {
         try {
             var response = httpClient.send(
                     request, HttpResponse.BodyHandlers.ofString());
-            log.info("inferno 2 {}", response);
+            log.info("response client: {}", response);
             if (response.statusCode() == 404) {
                 return Collections.emptyList();
             }
