@@ -1,22 +1,15 @@
 package com.sysmap.attendance.service;
 
-import com.sysmap.attendance.data.StudentRepository;
+import com.sysmap.attendance.data.IStudentRepository;
 import com.sysmap.attendance.domain.Student;
-import com.sysmap.attendance.exception.StudentNotFound;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class StudentService {
 
-    private final StudentRepository studentRepository;
-
-    public StudentService(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    private final IStudentRepository studentRepository;
 
     public void createStudent(Student student){
         studentRepository.save(student);

@@ -19,10 +19,7 @@ public class RedisConfiguration {
                 .disableCachingNullValues()
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
                         new GenericJackson2JsonRedisSerializer()));
-    }/*dá mais controle sobre a configuração padrão.
-    Por exemplo, podemos definir os valores TTL (Time to live)
-    desejados e personalizar a estratégia padrão de serialização
-    para a criação de cache a bordo. */
+    }
 
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {

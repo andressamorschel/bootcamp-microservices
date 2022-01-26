@@ -55,7 +55,7 @@ public class MsLearningCourseClient {
         return false;
     }
 
-    public Optional<StudentResponse> getStudent(String studentId) {
+    public Optional<StudentResponse> getStudentById(String studentId) {
         var uri = UriComponentsBuilder.fromUriString(baseUrl)
                 .path("/v1/students/" + studentId)
                 .build()

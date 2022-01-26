@@ -2,7 +2,7 @@ package com.sysmap.attendance;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sysmap.attendance.data.AttendanceRepository;
+import com.sysmap.attendance.data.IAttendanceRepository;
 import com.sysmap.attendance.domain.Attendance;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
 public class TestDaChina {
 
     @Autowired
-    private AttendanceRepository attendanceRepository;
+    private IAttendanceRepository attendanceRepository;
 
     @PostConstruct
     public void teste() throws JsonProcessingException {

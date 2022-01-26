@@ -1,9 +1,8 @@
 package com.sysmap.attendance.service;
 
 import com.sysmap.attendance.client.MsLearningCourseClient;
-import com.sysmap.attendance.data.AttendanceRepository;
+import com.sysmap.attendance.data.IAttendanceRepository;
 import com.sysmap.attendance.domain.Attendance;
-import com.sysmap.attendance.domain.Student;
 import com.sysmap.attendance.dto.request.RegisterAttendanceRequest;
 import com.sysmap.attendance.dto.response.Attendances;
 import com.sysmap.attendance.dto.response.GetAttendancesResponse;
@@ -24,8 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AttendanceService {
 
-    private final AttendanceRepository attendanceRepository;
-    private final AttendanceMapper attendanceMapper;
+    private final IAttendanceRepository attendanceRepository;
     private final StudentService studentService;
     private final MsLearningCourseClient msLearningCourseClient;
 
@@ -76,7 +74,7 @@ public class AttendanceService {
 
         log.info("attendances {}", attendances);
 
-        var student = msLearningCourseClient.getStudent(studentId).get();
+        var student = msLearningCourseClient.getStudentById(studentId).get();
 
         log.info("student {}", student);
 

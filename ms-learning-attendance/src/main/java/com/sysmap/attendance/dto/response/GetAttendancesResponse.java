@@ -1,6 +1,5 @@
 package com.sysmap.attendance.dto.response;
 
-import com.sysmap.attendance.domain.Attendance;
 import lombok.Builder;
 import lombok.Data;
 

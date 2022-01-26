@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sysmap.attendance.domain.Student;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +23,7 @@ public class StudentConsumer {
     private String topicName;
 
     @KafkaListener(topics = "${topic.name.consumer}", groupId = "group_id")
-    public void consume(@Payload String studentMessage){
+    public void consume(@Payload String studentMessage) {
 
         try {
             var student = objectMapper.readValue(studentMessage, Student.class);
