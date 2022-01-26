@@ -2,14 +2,16 @@ package com.sysmap.learning.cad.controller;
 
 import com.sysmap.learning.cad.dto.request.StudentRequest;
 import com.sysmap.learning.cad.dto.response.FindStudentResponse;
+import com.sysmap.learning.cad.dto.response.CreateStudentResponse;
 import com.sysmap.learning.cad.service.StudentService;
-import com.sysmap.learning.cad.dto.response.StudentCreateResponse;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("api/v1/students")
 public class StudentController {
 
@@ -17,7 +19,7 @@ public class StudentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentCreateResponse createStudent(@RequestBody StudentRequest request) {
+    public CreateStudentResponse createStudent(@RequestBody @Valid StudentRequest request) {
         return studentService.createStudent(request);
     }
 

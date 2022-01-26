@@ -1,8 +1,10 @@
 package com.sysmap.learning.cad.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class CreatedStudentEvent {
 
     private String studentId;
@@ -11,12 +13,4 @@ public class CreatedStudentEvent {
 
     private String courseId;
 
-    public CreatedStudentEvent(String studentId, String fullName, String courseId) {
-        this.studentId = studentId;
-        this.fullName = fullName;
-        this.courseId = courseId;
-    }
-
-    public CreatedStudentEvent() {
-    }
 }

@@ -2,8 +2,8 @@ package com.sysmap.learning.cad.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sysmap.learning.cad.exception.HttpException;
 import com.sysmap.learning.cad.dto.response.CourseResponse;
+import com.sysmap.learning.cad.exception.HttpException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

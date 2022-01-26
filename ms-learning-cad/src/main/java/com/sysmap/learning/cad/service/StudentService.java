@@ -3,16 +3,16 @@ package com.sysmap.learning.cad.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sysmap.learning.cad.client.MsLearningCourseClient;
+import com.sysmap.learning.cad.data.IStudentRepository;
+import com.sysmap.learning.cad.domain.Student;
 import com.sysmap.learning.cad.dto.request.CreatedStudentEvent;
 import com.sysmap.learning.cad.dto.request.StudentRequest;
-import com.sysmap.learning.cad.data.StudentRepository;
-import com.sysmap.learning.cad.domain.Student;
+import com.sysmap.learning.cad.dto.response.CourseResponse;
+import com.sysmap.learning.cad.dto.response.CreateStudentResponse;
+import com.sysmap.learning.cad.dto.response.FindStudentResponse;
 import com.sysmap.learning.cad.exception.CourseIdNotFound;
 import com.sysmap.learning.cad.exception.StudentNotFound;
 import com.sysmap.learning.cad.mapper.StudentMapper;
-import com.sysmap.learning.cad.dto.response.FindStudentResponse;
-import com.sysmap.learning.cad.dto.response.CourseResponse;
-import com.sysmap.learning.cad.dto.response.StudentCreateResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,13 +25,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class StudentService {
 
-    private final StudentRepository studentRepository;
+    private final IStudentRepository studentRepository;
     private final StudentMapper studentMapper;
     private final MsLearningCourseClient msLearningCourseClient;
     private final ObjectMapper objectMapper;
     private final EventService eventService;
 
-    public StudentCreateResponse createStudent(StudentRequest studentRequest) {
+    public CreateStudentResponse createStudent(StudentRequest studentRequest) {
 
         var student = studentMapper.studentRequestToEntity(studentRequest);
         var courses = msLearningCourseClient.getCourseById(student.getCourseId());
@@ -65,6 +65,7 @@ public class StudentService {
         return student.toBuilder()
                 .studentId(UUID.randomUUID().toString())
                 .status(true)
+                .birthDate(student.getBirthDate())
                 .createdOn(LocalDateTime.now())
                 .build();
     }
