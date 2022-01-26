@@ -23,7 +23,7 @@ This project is a challenge from Sysmap microservices bootcamp, which consists o
 - [x] Configure Swagger
 - [ ] Implement unit tests
 - [ ] Add Spring Security
-- [ ] Add Spring validations
+- [x] Add Spring validations
 - [ ] Handle exceptions
 
 
