@@ -22,9 +22,7 @@ This project is a challenge from Sysmap microservices bootcamp, which consists o
 - [x] Configure Redis
 - [x] Configure Swagger
 - [ ] Implement unit tests
-- [ ] Add Spring Security
 - [x] Add Spring validations
-- [ ] Handle exceptions
 
 
 ## Technologies/dependencies:
