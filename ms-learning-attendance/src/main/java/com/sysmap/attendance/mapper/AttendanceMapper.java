@@ -14,10 +14,6 @@ public class AttendanceMapper {
 
     private final ModelMapper modelMapper;
 
-    public Attendance registerAttendanceToEntity(RegisterAttendanceRequest registerAttendanceRequest){
-        return modelMapper.map(registerAttendanceRequest, Attendance.class);
-    }
-
 //    public GetAttendancesResponse entityToGetAttendancesResponse(Attendance attendance){
 //        return modelMapper.map(attendance, GetAttendancesResponse.class);
 //    }

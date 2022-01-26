@@ -4,11 +4,10 @@ import com.sysmap.attendance.domain.Attendance;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 public interface AttendanceRepository extends CrudRepository<Attendance, String> {
 
-    Optional<Attendance> findByStudentId(String studentId);
+    Attendance findByStudentId(String studentId);
+
 
 }
