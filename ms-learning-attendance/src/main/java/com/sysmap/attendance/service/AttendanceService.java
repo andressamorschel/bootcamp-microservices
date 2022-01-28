@@ -52,41 +52,61 @@ public class AttendanceService {
         attendanceRepository.save(attendance);
     }
 
-    public Optional<GetAttendancesResponse> getAttendances(String studentId) {
-        var oi = attendanceRepository.findAll();
-        log.info("findAll {}", oi);
-        var findAttendance = attendanceRepository
-                .findByStudentId(studentId);
-        var chinoDouglas = attendanceRepository.findById("0b4bab67-495c-4b18-8759-f8ab3f8d7460");
+//    public Optional<GetAttendancesResponse> getAttendances(String studentId) {
+//        var oi = attendanceRepository.findAll();
+//        log.info("findAll {}", oi);
+//        var findAttendance = attendanceRepository
+//                .findByStudentId(studentId);
+//        var chinoDouglas = attendanceRepository.findById("0b4bab67-495c-4b18-8759-f8ab3f8d7460");
+//
+//        log.info("chinoDouglas {}", chinoDouglas);
+//        log.info("findAttendance {}", findAttendance);
+//
+////        if(findAttendance.isEmpty()){
+////            return Optional.empty();
+////        }
+//
+//        var attendances = Attendances.builder()
+//                .courseId(findAttendance.getCourseId())
+//                .classDate(findAttendance.getClassDate())
+//                .attendanceStatus(findAttendance.isAttendanceStatus())
+//                .build();
+//
+//        log.info("attendances {}", attendances);
+//
+//        var student = msLearningCourseClient.getStudentById(studentId).get();
+//
+//        log.info("student {}", student);
+//
+//        var response = GetAttendancesResponse.builder()
+//                .fullName(student.getFullName())
+//                .attendances(List.of(attendances))
+//                .courseName(student.getCourseName())
+//                .build();
+//
+//        log.info("response {}", response);
+//
+//        return Optional.of(response);
+//    }
 
-        log.info("chinoDouglas {}", chinoDouglas);
-        log.info("findAttendance {}", findAttendance);
+    public GetAttendancesResponse getAttendances2(String studentId){
+        var responseAttendance = attendanceRepository.findByStudentId(studentId);
 
-//        if(findAttendance.isEmpty()){
-//            return Optional.empty();
-//        }
-
-        var attendances = Attendances.builder()
-                .courseId(findAttendance.getCourseId())
-                .classDate(findAttendance.getClassDate())
-                .attendanceStatus(findAttendance.isAttendanceStatus())
-                .build();
-
-        log.info("attendances {}", attendances);
+        log.info("responseAttendance: {}", responseAttendance);
 
         var student = msLearningCourseClient.getStudentById(studentId).get();
 
-        log.info("student {}", student);
-
-        var response = GetAttendancesResponse.builder()
-                .fullName(student.getFullName())
-                .attendances(List.of(attendances))
-                .courseName(student.getCourseName())
+        var attendances = Attendances.builder()
+                .courseId(responseAttendance.get().getCourseId())
+                .classDate(responseAttendance.get().getClassDate())
+                .attendanceStatus(responseAttendance.get().isAttendanceStatus())
                 .build();
 
-        log.info("response {}", response);
-
-        return Optional.of(response);
+        return GetAttendancesResponse.builder()
+                .attendances(List.of(attendances))
+                .courseName(student.getCourseName())
+                .fullName(student.getFullName())
+                .build();
     }
 
 }

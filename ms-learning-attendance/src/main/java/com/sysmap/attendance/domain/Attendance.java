@@ -2,6 +2,7 @@ package com.sysmap.attendance.domain;
 
 import lombok.Data;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class Attendance implements Serializable {
 
     private String courseId;
 
+    @Indexed
     private String studentId;
 
     private LocalDateTime classDate;

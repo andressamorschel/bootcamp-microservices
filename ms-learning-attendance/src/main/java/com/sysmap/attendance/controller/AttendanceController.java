@@ -25,7 +25,7 @@ public class AttendanceController {
     }
 
     @GetMapping("/{studentId}")
-    public Optional<GetAttendancesResponse> findAttendancesByStudent(@PathVariable String studentId) {
-        return attendanceService.getAttendances(studentId);
+    public GetAttendancesResponse findAttendancesByStudent(@PathVariable String studentId) {
+        return attendanceService.getAttendances2(studentId);
     }
 }
